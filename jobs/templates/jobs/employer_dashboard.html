@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard - JobBoard</title>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background: url('https://img.freepik.com/free-photo/black-smooth-textured-paper_53876-96064.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+        .hero .content {
+            text-align: center;
+        }
+        .hero .content h1 {
+            font-size: 64px; /* Increased font size */
+            margin: 0;
+        }
+        .hero .content p {
+            font-size: 24px;
+        }
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .search-box input,
+        .search-box select {
+            margin: 0 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .search-box input {
+            flex: 1;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .job-description {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">JobBoard</div>
+    </nav>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="eg. Developer, Manager">
+        <select id="categorySelect">
+            <option value="category" selected>Category</option>
+            <option value="developer">Developer</option>
+            <option value="manager">Manager</option>
+            <!-- Add more categories as needed -->
+        </select>
+        <select id="locationSelect">
+            <option value="location" selected>Location</option>
+            <option value="new-york">New York</option>
+            <option value="san-francisco">San Francisco</option>
+            <!-- Add more locations as needed -->
+        </select>
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="hero">
+        <div class="content">
+            <h1>Employer Dashboard - Find Your Next Hire</h1>
+            <p>We have <span style="color: #ff5722;">200,000</span> candidates ready to join your team!</p>
+        </div>
+    </div>
+    <div id="candidateListContainer" class="job-description">
+        <!-- Candidate profiles will be dynamically added here -->
+    </div>
+
+    <script>
+        // Sample JavaScript for handling search functionality
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchInput = document.getElementById('searchInput').value;
+            var category = document.getElementById('categorySelect').value;
+            var location = document.getElementById('locationSelect').value;
+
+            // Simulate fetching candidate profiles from backend (replace with actual AJAX call)
+            var candidates = [
+                { name: 'Candidate 1', profile: 'Profile for Candidate 1' },
+                { name: 'Candidate 2', profile: 'Profile for Candidate 2' },
+                { name: 'Candidate 3', profile: 'Profile for Candidate 3' }
+            ];
+
+            // Clear previous candidate profiles
+            var container = document.getElementById('candidateListContainer');
+            container.innerHTML = '';
+
+            // Display candidate profiles
+            candidates.forEach(function(candidate) {
+                var candidateDiv = document.createElement('div');
+                candidateDiv.innerHTML = '<h3>' + candidate.name + '</h3><p>' + candidate.profile + '</p>';
+                container.appendChild(candidateDiv);
+            });
+        });
+    </script>
+</body>
+</html>

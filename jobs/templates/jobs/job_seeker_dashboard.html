@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - JobBoard</title>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+        }
+        .hero {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            background: url('https://img.freepik.com/free-photo/black-smooth-textured-paper_53876-96064.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+        .hero .content {
+            text-align: center;
+        }
+        .hero .content h1 {
+            font-size: 64px; /* Increased font size */
+            margin: 0;
+        }
+        .hero .content p {
+            font-size: 24px;
+        }
+        .search-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            background-color: black;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .search-box input,
+        .search-box select {
+            margin: 0 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        .search-box input {
+            flex: 1;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: green;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .job-description {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">JobBoard</div>
+    </nav>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="eg. Graphic, Web Developer">
+        <select id="categorySelect">
+            <option value="category" selected>Category</option>
+            <option value="graphic">Graphic Design</option>
+            <option value="web">Web Developer</option>
+            <!-- Add more categories as needed -->
+        </select>
+        <select id="locationSelect">
+            <option value="location" selected>Location</option>
+            <option value="new-york">New York</option>
+            <option value="san-francisco">San Francisco</option>
+            <!-- Add more locations as needed -->
+        </select>
+        <button id="searchButton">Search</button>
+    </div>
+    <div class="hero">
+        <div class="content">
+            <h1>Largest Job Site In The World</h1>
+            <p>We have <span style="color: #ff5722;">200,000</span> great job offers you deserve!</p>
+        </div>
+    </div>
+    <div id="jobDescriptionContainer" class="job-description">
+        {% if job_descriptions %}
+            {% for job in job_descriptions %}
+                <div>
+                    <h3>{{ job.title }}</h3>
+                    <p>{{ job.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No job descriptions found.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        // Sample JavaScript for handling search functionality
+        document.getElementById('searchButton').addEventListener('click', function() {
+            var searchInput = document.getElementById('searchInput').value;
+            var category = document.getElementById('categorySelect').value;
+            var location = document.getElementById('locationSelect').value;
+
+            // Simulate fetching job descriptions from backend (replace with actual AJAX call)
+            var jobDescriptions = [
+                { title: 'Job Title 1', description: 'Description for Job 1' },
+                { title: 'Job Title 2', description: 'Description for Job 2' },
+                { title: 'Job Title 3', description: 'Description for Job 3' }
+            ];
+
+            // Clear previous job descriptions
+            var container = document.getElementById('jobDescriptionContainer');
+            container.innerHTML = '';
+
+            // Display job descriptions
+            jobDescriptions.forEach(function(job) {
+                var jobDiv = document.createElement('div');
+                jobDiv.innerHTML = '<h3>' + job.title + '</h3><p>' + job.description + '</p>';
+                container.appendChild(jobDiv);
+            });
+        });
+    </script>
+</body>
+</html>
